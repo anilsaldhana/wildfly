@@ -96,7 +96,7 @@ public class InfinispanCacheDeploymentListener implements EventListener {
             // need a shared cache for jpa applications
             serviceName = EmbeddedCacheManagerService.getServiceName(container);
             ServiceRegistry registry = CurrentServiceContainer.getServiceContainer();
-            embeddedCacheManager = (EmbeddedCacheManager) registry.getRequiredService(serviceName).getValue();
+            embeddedCacheManager = (EmbeddedCacheManager) registry.getRequiredService(serviceName).awaitValue();
         }
         return new CacheWrapper(embeddedCacheManager, serviceName);
     }
